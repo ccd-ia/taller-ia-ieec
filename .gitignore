@@ -1,0 +1,28 @@
+# Sistema operativo
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Respaldos y temporales
+*.bak
+*.tmp
+*.swp
+*~
+
+# Contexto personal de cada participante (no se comparte)
+CLAUDE.personal.md
+
+# Configuración local de Claude Code
+.claude/settings.local.json
+
+# Node / herramientas (por si algún ejercicio las usa)
+node_modules/
+npm-debug.log*
+.env
+.env.local
+
+# Python (por si algún ejercicio lo usa)
+__pycache__/
+*.pyc
+.venv/
+venv/

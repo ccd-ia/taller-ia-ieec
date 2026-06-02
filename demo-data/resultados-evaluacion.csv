@@ -1,0 +1,23 @@
+estado,materia,promedio,n_estudiantes
+Aguascalientes,matematicas,7.4,1820
+Aguascalientes,espanol,7.9,1820
+Chiapas,matematicas,5.8,3640
+Chiapas,espanol,6.2,3640
+Ciudad de Mexico,matematicas,7.1,5210
+Ciudad de Mexico,espanol,7.6,5210
+Guerrero,matematicas,5.5,2980
+Guerrero,espanol,6.0,2980
+Jalisco,matematicas,6.9,4120
+Jalisco,espanol,7.3,4120
+Nuevo Leon,matematicas,7.6,3890
+Nuevo Leon,espanol,7.8,3890
+Oaxaca,matematicas,5.6,2740
+Oaxaca,espanol,6.1,2740
+Queretaro,matematicas,7.2,1560
+Queretaro,espanol,7.5,1560
+Sonora,matematicas,6.7,2210
+Sonora,espanol,7.0,2210
+Yucatan,matematicas,6.5,1980
+Yucatan,espanol,6.9,1980
+Zacatecas,matematicas,6.3,890
+Zacatecas,espanol,6.7,890
