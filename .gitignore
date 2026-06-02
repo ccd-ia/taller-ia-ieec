@@ -9,8 +9,9 @@ desktop.ini
 *.swp
 *~
 
-# Contexto personal de cada participante (no se comparte)
-CLAUDE.personal.md
+# Contexto personal de cada participante (no se comparte) —
+# solo la copia en la raíz, NO la plantilla en templates/
+/CLAUDE.personal.md
 
 # Configuración local de Claude Code
 .claude/settings.local.json

@@ -80,10 +80,10 @@ mental de Claude Code:
 
 ### Sesión 2 — `CLAUDE.md` institucional
 
-Tomamos el esqueleto de `CLAUDE.md` (en la raíz de este repositorio) y entre
-todos lo extendemos: definimos el tono institucional, los criterios de
-evidencia, y completamos las **seis líneas de investigación** del IEEC. Ese
-archivo se vuelve la memoria compartida que Claude Code lee en cada sesión.
+Tomamos el esqueleto `CLAUDE.institutional.md` y entre todos lo extendemos:
+definimos el tono institucional, los criterios de evidencia, y completamos las
+**seis líneas de investigación** del IEEC. Al activarlo como el `CLAUDE.md` del
+equipo, se vuelve la memoria compartida que Claude Code lee en cada sesión.
 
 ---
 
@@ -93,7 +93,7 @@ archivo se vuelve la memoria compartida que Claude Code lee en cada sesión.
 taller-ia-ieec/
 ├── README.md                      ← este archivo
 ├── INSTALL.md                     ← cómo instalar Claude Code
-├── CLAUDE.md                      ← esqueleto institucional (se extiende en Sesión 2)
+├── CLAUDE.institutional.md        ← esqueleto institucional (se activa como CLAUDE.md en Sesión 2)
 ├── templates/
 │   ├── CLAUDE.personal.md         ← contexto personal de cada participante
 │   ├── craft-prompt.md            ← andamiaje CRAFT para prompts
