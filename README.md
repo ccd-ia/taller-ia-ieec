@@ -78,12 +78,25 @@ mental de Claude Code:
 - **Datos** (`demo-data/`): archivos sintéticos para practicar sin tocar datos
   reales.
 
-### Sesión 2 — `CLAUDE.md` institucional
+### Sesión 2a — Contenido (lunes 15 de junio, 10:00–13:00)
 
-Tomamos el esqueleto `CLAUDE.institutional.md` y entre todos lo extendemos:
-definimos el tono institucional, los criterios de evidencia, y completamos las
-**seis líneas de investigación** del IEEC. Al activarlo como el `CLAUDE.md` del
-equipo, se vuelve la memoria compartida que Claude Code lee en cada sesión.
+Subimos del contexto persistente (`CLAUDE.md`) a la **orquestación**: cómo trabaja
+Claude Code (el ciclo de interacción, administración del contexto, Plan Mode), la
+columna vertebral del taller (tácticas, puntos de apalancamiento, ADWs) y las
+cuatro piezas —Skill, Command, Hook, Agente—. Construimos un skill con el
+meta-prompt.
+
+### Sesión 2b — Presentaciones (martes 23 de junio, 16:00–18:00)
+
+Cada equipo presenta la skill que construyó y probó entre sesiones. Cerramos con
+los **próximos pasos**: de la skill al ADW (Hook + modo headless `claude -p`), la
+automatización de reportes, y la construcción del `CLAUDE.md` **institucional**
+del IEEC —juntamos los glosarios de cada equipo en la memoria compartida que
+Claude Code lee en cada sesión—.
+
+> **Guías de referencia.** En [`guias/`](./guias/) quedan cuatro guías de consulta
+> (Claude Code, cheatsheet, Cowork y Claude in Chrome) para seguir trabajando
+> después del taller.
 
 ---
 
@@ -93,13 +106,24 @@ equipo, se vuelve la memoria compartida que Claude Code lee en cada sesión.
 taller-ia-ieec/
 ├── README.md                      ← este archivo
 ├── INSTALL.md                     ← cómo instalar Claude Code
-├── CLAUDE.institutional.md        ← esqueleto institucional (se activa como CLAUDE.md en Sesión 2)
+├── CLAUDE.institutional.md        ← esqueleto institucional (se activa como CLAUDE.md en Sesión 2b)
+├── guias/                         ← guías de referencia para después del taller
+│   ├── README.md                  ← índice de las guías
+│   ├── claude-code-guia.md        ← referencia completa de Claude Code
+│   ├── cheatsheet.md              ← hoja de referencia rápida (1 página)
+│   ├── cowork-guia.md             ← Cowork (escritorio, sin terminal)
+│   └── claude-chrome-guia.md      ← Claude in Chrome (navegador)
 ├── templates/
 │   ├── CLAUDE.personal.md         ← contexto personal de cada participante
 │   ├── craft-prompt.md            ← andamiaje CRAFT para prompts
 │   ├── skill.md                   ← plantilla de SKILL.md
+│   ├── command.md                 ← plantilla de comando / (lo invocas tú)
 │   ├── hook.md                    ← qué son los hooks y cómo configurarlos
-│   └── agent.md                   ← plantilla de subagente (une skill + hook)
+│   ├── agent.md                   ← plantilla de subagente (une skill + hook)
+│   ├── settings.example.json      ← ejemplo de .claude/settings.json (permisos + hooks)
+│   ├── statusline.py              ← línea de estado (contexto, costo, git) — ver guías
+│   └── scripts/
+│       └── revisar-perimetro.sh   ← hook de seguridad (dignidad de datos)
 ├── meta-prompts/
 │   └── build-a-skill.md           ← meta-prompt que te genera un skill
 ├── examples/
