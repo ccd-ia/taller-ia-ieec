@@ -169,11 +169,7 @@ ls -la ~/Cowork-Workspace/output/
 
 Deberías ver:
 - Subcarpetas organizadas en `input/`.
-- Un archivo de resumen en `output/`.
-
-![Captura: un reporte de tarea de Cowork tras una ejecución — resume duplicados eliminados, archivos renombrados y el total de archivos organizados por categoría.](imagenes/cowork-task-report.jpg)
-
-*Captura de un reporte de tarea de Claude Cowork (producto de Anthropic).*
+- Un archivo de resumen en `output/` que lista las subcarpetas creadas, cuántos archivos se movieron a cada categoría y las acciones que Cowork realizó.
 
 ---
 
@@ -703,6 +699,10 @@ Crea reportes con formato a partir de datos en bruto:
 ENTRADA:  CSV con datos de ventas
 SALIDA:   Reporte con formato, gráficas y análisis
 ```
+
+![Captura: un reporte que Cowork generó a partir de datos de ventas — KPIs (usuarios activos, ingresos, conversiones, abandono), una gráfica de ingresos por semana, la mezcla de tráfico y los insights clave al pie.](imagenes/cowork-reporte.webp)
+
+*Captura de un reporte generado por Claude Cowork (producto de Anthropic, claude.com/product/cowork).*
 
 **Qué hace Cowork**:
 - Analiza patrones en los datos.
