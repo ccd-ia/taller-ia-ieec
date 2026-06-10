@@ -806,8 +806,9 @@ y configuración en módulos instalables.
 | Auditoría de seguridad crítica | Opus | max | ~$2+ |
 | Orquestación multi-agente | Sonnet + Haiku | mixto | variable |
 
-**Precios** (por MTok, entrada/salida): Haiku $0.80/$4.00, Sonnet $3/$15,
-Opus $5/$25.
+**Precios** (por MTok, entrada/salida): Haiku $1.00/$5.00, Sonnet $3/$15,
+Opus $5/$25. El Opus más capaz al momento de escribir es **Opus 4.8**
+(`claude-opus-4-8`).
 
 > Con los planes **Pro/Max** pagas una tarifa plana, así que prioriza
 > **calidad** sobre costo.
@@ -956,42 +957,17 @@ Next Session*: Branch, archivos clave, dependencias).
 > **Pro tip:** pídele a Claude «Create a session handoff document for what we
 > accomplished today».
 
-### La tríada de handoff
-
-| Comando | Qué hace |
-|---------|----------|
-| `/handoff:create` | genera el documento |
-| `/handoff:resume` | lo carga, confirma y **espera tu aprobación** |
-| `/handoff:update` | lo actualiza con reglas de mezcla por sección |
-
-**Reglas de mezcla por sección** (al actualizar):
-
-| Sección | Regla |
-|---------|-------|
-| Task / Scope | conservar o refinar |
-| Files | mezclar (*merge*) |
-| Discoveries | agregar al final (*append*) |
-| Work Done | solo agregar (*append-only*; incluir los *commit hashes*) |
-| Status | reemplazar |
-| Next Steps | reemplazar |
-
-> El *Work Done* es **append-only** a propósito: forma un rastro de auditoría a
-> lo largo de las sesiones.
-
 ### En este taller
 
 El repositorio de este taller **ya incluye** este patrón empaquetado como
-skills, listos para usar. No tienes que armar la tríada a mano: corre
+skills, listos para usar. Son dos:
 
-- **`/handoff`** — toma una foto del estado y asegura la continuidad **al
-  cerrar** la sesión (es el *snapshot* de cierre).
 - **`/session-start`** — carga el contexto de la sesión previa **al abrir** una
   nueva, para que retomes donde quedaste.
-- **`/session-summary`** — genera el registro de la sesión en formato org-mode
-  (el log durable de qué pasó).
+- **`/handoff`** — toma una foto del estado y asegura la continuidad **al
+  cerrar** la sesión (es el *snapshot* de cierre).
 
-Entre los tres cubren el ciclo completo: abrir con `/session-start`, cerrar con
-`/handoff` y dejar el registro con `/session-summary`.
+El ciclo es simple: abres con `/session-start` y cierras con `/handoff`.
 
 ---
 

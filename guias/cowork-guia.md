@@ -1,18 +1,8 @@
 ---
 título: "Guía de referencia de Cowork"
 contexto: "Taller de IA con Claude Code — IEEC"
-audiencia: "Personal de política educativa pública (no programadores)"
 adaptado_de: "Documento original de Florian Bruniaux, traducido y adaptado al español (es-MX)"
 ---
-
-> **Nota para el taller**: Esta es una **guía de referencia** preparada para el
-> *Taller de IA con Claude Code* del IEEC. Está adaptada del documento original
-> en inglés de **Florian Bruniaux** y traducida al español de México. Conserva
-> en inglés los nombres de productos, funciones, comandos, rutas de archivos y
-> términos técnicos establecidos; el resto del contenido se tradujo y, en
-> algunos puntos, se amplió ligeramente para facilitar su lectura a personas sin
-> formación técnica. Al final encontrará una sección **«Notas de revisión»** con
-> observaciones sobre contenido que podría estar desactualizado.
 
 # Primeros pasos con Cowork
 
@@ -113,6 +103,10 @@ Esto crea:
 └── output/   # Donde Cowork deja los resultados
 ```
 
+![Captura: el diálogo de Cowork donde se otorga acceso a una carpeta — Claude pide permiso antes de leer, editar o eliminar archivos (Cancelar / Permitir siempre / Permitir).](imagenes/cowork-workspace.webp)
+
+*Captura de Claude Cowork (producto de Anthropic). El diálogo muestra el permiso por carpeta; concédelo únicamente a `~/Cowork-Workspace/`.*
+
 ### 2.2 Otorga acceso a la carpeta
 
 1. Inicia una nueva conversación de Cowork.
@@ -177,6 +171,10 @@ Deberías ver:
 - Subcarpetas organizadas en `input/`.
 - Un archivo de resumen en `output/`.
 
+![Captura: un reporte de tarea de Cowork tras una ejecución — resume duplicados eliminados, archivos renombrados y el total de archivos organizados por categoría.](imagenes/cowork-task-report.jpg)
+
+*Captura de un reporte de tarea de Claude Cowork (producto de Anthropic).*
+
 ---
 
 ## Paso 4: Entiende el flujo de trabajo
@@ -193,6 +191,8 @@ flowchart TD
     D --> E["EJECUCIÓN<br/>Cowork realiza las acciones aprobadas"]
     E --> F["REPORTE<br/>Resumen de lo que se hizo"]
 ```
+
+*El diagrama anterior muestra el punto clave del ciclo: Cowork **propone un plan y espera tu aprobación** antes de ejecutar cualquier acción.*
 
 ### Puntos clave
 
@@ -260,7 +260,7 @@ Haz esto:
 ```
 
 Este enfoque por lotes también optimiza el uso de tokens (consulta la
-[hoja de referencia](../reference/cheatsheet.md) para conocer los presupuestos de tokens).
+[hoja de referencia](./cheatsheet.md) para conocer los presupuestos de tokens).
 
 ---
 
@@ -409,10 +409,10 @@ clientes, tu estilo y tus patrones de trabajo recurrentes.
 
 Computer Use le permite a Claude controlar tu escritorio directamente (abrir
 aplicaciones, hacer clic, llenar formularios, navegar por el navegador) sin
-ninguna integración personalizada. Disponible en los planes Pro y Max, solo en
-macOS.
+ninguna integración personalizada. Disponible en los planes Pro y Max (no en Team
+ni Enterprise), en macOS y Windows.
 
-> **Nota**: Computer Use es una función en vista previa de investigación, disponible en los planes Pro y Max, solo en macOS. Úsala para tareas supervisadas en las que puedas revisar cada acción.
+> **Nota**: Computer Use es una función en vista previa de investigación, disponible en los planes Pro y Max (no Team ni Enterprise), en macOS y Windows (dentro de la app de escritorio). Úsala para tareas supervisadas en las que puedas revisar cada acción.
 
 ### 9.1 Actívala en Claude Desktop
 
@@ -490,10 +490,10 @@ Para enviar tareas a tu escritorio desde tu teléfono mientras estás fuera:
 
 Ya estás listo para:
 
-1. **[Explorar capacidades](02-capabilities.md)**: Aprende qué puede hacer Cowork.
-2. **[Revisar la seguridad](03-security.md)**: Prácticas de uso seguro.
-3. **[Probar flujos de trabajo](../workflows/)**: Tutoriales paso a paso.
-4. **[Usar prompts listos](../prompts/)**: Plantillas para copiar y pegar.
+1. **[Explorar capacidades](#matriz-de-capacidades)**: Aprende qué puede hacer Cowork (más abajo en esta guía).
+2. **[Revisar la seguridad](#contexto-de-seguridad)**: Prácticas de uso seguro (más abajo en esta guía).
+3. **Probar flujos de trabajo**: Sigue los pasos paso a paso de esta misma guía.
+4. **Usar prompts listos**: Reutiliza las plantillas de prompts que aparecen a lo largo de esta guía. Para la terminal, consulta también la [guía principal de Claude Code](./claude-code-guia.md).
 
 ---
 
@@ -525,15 +525,15 @@ significativa.
 
 | Modelo | Mejor para | Velocidad | Context Window | Costo de uso |
 |--------|------------|-----------|----------------|--------------|
-| **Haiku 4.5** | Tareas muy simples, consultas rápidas | Muy rápido | Estándar | Bajo |
-| **Sonnet 4.6** ⭐ | Tareas agénticas, automatización de archivos, flujos diarios de Cowork | Rápido | 1M tokens, 128K de salida | Estándar |
-| **Opus 4.6** | Razonamiento profundo, análisis científico, tareas multiagente complejas | Más lento | 1M tokens, 128K de salida | Más alto (5x Sonnet) |
-| **Opus 4.7** | Las tareas más difíciles, trabajo con muchas imágenes, proyectos largos de varias sesiones | Más lento | 1M tokens, 128K de salida | Más alto (5x Sonnet) |
+| **Haiku 4.5** | Tareas muy simples, consultas rápidas | Muy rápido | 200K tokens, 64K de salida | Bajo ($1 / $5 por MTok) |
+| **Sonnet 4.6** ⭐ | Tareas agénticas, automatización de archivos, flujos diarios de Cowork | Rápido | 1M tokens, 64K de salida | Estándar ($3 / $15 por MTok) |
+| **Opus 4.7** | Tareas difíciles, trabajo con muchas imágenes, proyectos largos de varias sesiones | Más lento | 1M tokens | Más alto, 5x Sonnet ($5 / $25 por MTok) |
+| **Opus 4.8** | Las tareas más difíciles; el Opus más capaz al momento de escribir | Más lento | 1M tokens | Más alto, 5x Sonnet ($5 / $25 por MTok) |
 
-**Notas sobre los modelos** (actualizado en mayo de 2026):
-- **Sonnet 4.6** (lanzado el 17 de febrero de 2026): Es el valor predeterminado recomendado para Cowork. Alcanza 72.5% en OSWorld-Verified (benchmark de computer use) frente al 72.7% de Opus 4.6, es decir, un desempeño agéntico prácticamente idéntico a 5 veces menor costo. Context window de 1M tokens, 128K de salida y razonamiento adaptativo.
-- **Opus 4.6** (lanzado el 5 de febrero de 2026): Razonamiento científico profundo (91.3% en GPQA Diamond) y coordinación multiagente compleja. Para las operaciones de archivos estándar de Cowork, la diferencia de desempeño con Sonnet 4.6 es insignificante.
-- **Opus 4.7** (lanzado el 16 de abril de 2026): Mejora notable sobre Opus 4.6 en las tareas más difíciles. Corrige por sí mismo errores de lógica durante la planeación, sigue mejor las instrucciones y tiene una visión más potente (imágenes de hasta 2,576px / ~3.75 megapíxeles, 3× la resolución anterior). Produce mejores resultados en presentaciones, documentos e interfaces. Mejor memoria en el sistema de archivos entre sesiones. Incluye un nuevo nivel de esfuerzo `xhigh`. Mismo precio que Opus 4.6. Úsalo para flujos de trabajo complejos de varios pasos donde la calidad es lo más importante.
+**Notas sobre los modelos** (precios confirmados a junio de 2026; verifica el modelo más reciente contra la documentación oficial vigente):
+- **Sonnet 4.6** (lanzado el 17 de febrero de 2026): Es el valor predeterminado recomendado para Cowork. Alcanza 72.5% en OSWorld-Verified (benchmark de computer use) frente al 72.7% de Opus 4.6, es decir, un desempeño agéntico prácticamente idéntico a 5 veces menor costo. Context window de 1M tokens, 64K de salida y razonamiento adaptativo. Precio: $3 / $15 por MTok (entrada/salida).
+- **Opus 4.7** (lanzado el 16 de abril de 2026): Mejora notable sobre las versiones previas de Opus en las tareas más difíciles. Corrige por sí mismo errores de lógica durante la planeación, sigue mejor las instrucciones y tiene una visión más potente (imágenes de hasta 2,576px / ~3.75 megapíxeles, 3× la resolución anterior). Produce mejores resultados en presentaciones, documentos e interfaces. Mejor memoria en el sistema de archivos entre sesiones. Incluye un nuevo nivel de esfuerzo `xhigh`. Context window de 1M tokens. Precio: $5 / $25 por MTok.
+- **Opus 4.8** (el Opus más reciente y más capaz al momento de escribir): Sucede a Opus 4.7 con mejor razonamiento y seguimiento de instrucciones para los flujos de trabajo más exigentes. Mantiene el context window de 1M tokens y el mismo precio que Opus 4.7 ($5 / $25 por MTok). Úsalo para flujos de trabajo complejos de varios pasos donde la calidad es lo más importante.
 - **Compactación de contexto**: Cowork usa compactación automática para comprimir el historial de la conversación, lo que permite sesiones más largas sin perder el contexto importante.
 
 ### Cuándo usar cada modelo
@@ -545,27 +545,27 @@ significativa.
 | Borradores de correo, creación de documentos | **Sonnet 4.6** | Rápido y con calidad suficiente |
 | Automatizaciones diarias, tareas programadas | **Sonnet 4.6** | Mismo desempeño agéntico, 5 veces más barato |
 | Síntesis de investigación de varias fuentes | **Sonnet 4.6** | El contexto de 1M maneja grandes volúmenes |
-| Revisión de contratos, análisis legal | **Opus 4.6 / 4.7** | Ventaja en razonamiento profundo |
-| Reportes científicos/técnicos complejos | **Opus 4.6 / 4.7** | Se requiere razonamiento a nivel GPQA |
-| Coordinación multiagente | **Opus 4.7** | Mejor autocorrección y planeación |
-| Proyectos largos de varias sesiones | **Opus 4.7** | Memoria superior entre sesiones |
-| Análisis de imágenes/diagramas densos | **Opus 4.7** | Mejora de 3× en resolución |
-| Claude Design (presentaciones, decks) | **Opus 4.7** | Salida visual de mejor calidad |
+| Revisión de contratos, análisis legal | **Opus 4.8 / 4.7** | Ventaja en razonamiento profundo |
+| Reportes científicos/técnicos complejos | **Opus 4.8 / 4.7** | Se requiere razonamiento a nivel GPQA |
+| Coordinación multiagente | **Opus 4.8 / 4.7** | Mejor autocorrección y planeación |
+| Proyectos largos de varias sesiones | **Opus 4.8 / 4.7** | Memoria superior entre sesiones |
+| Análisis de imágenes/diagramas densos | **Opus 4.8 / 4.7** | Mejora de 3× en resolución |
+| Claude Design (presentaciones, decks) | **Opus 4.8 / 4.7** | Salida visual de mejor calidad |
 
 ### Consejos de selección
 
 1. **Usa Sonnet 4.6 por defecto**: Maneja más del 90% de las tareas de Cowork con un desempeño agéntico casi idéntico al de Opus.
-2. **Cambia a Opus 4.7** cuando:
+2. **Cambia a Opus 4.8/4.7** cuando:
    - Los resultados requieran razonamiento de nivel experto (legal, científico, regulatorio).
    - La tarea abarque varias sesiones y necesite contexto persistente.
    - Estés procesando imágenes, capturas de pantalla o diagramas densos.
    - La calidad de salida en presentaciones/documentos requiera consistentemente más profundidad.
-3. **Opus 4.7 vs 4.6**: La 4.7 detecta sus propios errores de lógica durante la planeación, sigue las instrucciones con mayor precisión y produce mejor salida visual. Para operaciones de archivos puras, la diferencia es marginal.
+3. **Opus 4.8 vs 4.7**: La 4.8 es el Opus más capaz al momento de escribir; mejora el razonamiento y el seguimiento de instrucciones frente a la 4.7. Para operaciones de archivos puras, la diferencia entre versiones de Opus es marginal.
 4. **Cuida tu cuota**: Opus consume 5 veces más cuota por token que Sonnet. En el plan Pro, esto se acumula rápido.
 
-> **Usuarios del plan Pro**: Sonnet 4.6 es tu opción predeterminada para todo. Reserva Opus 4.7 para esa rara tarea en la que la profundidad del razonamiento o la calidad visual realmente importen.
+> **Usuarios del plan Pro**: Sonnet 4.6 es tu opción predeterminada para todo. Reserva Opus 4.8/4.7 para esa rara tarea en la que la profundidad del razonamiento o la calidad visual realmente importen.
 >
-> **Usuarios del plan Max**: Empieza con Sonnet 4.6. Cambia a Opus 4.7 para revisión de contratos, proyectos de varios días, tareas con muchas imágenes o cuando la salida de Sonnet se quede corta.
+> **Usuarios del plan Max**: Empieza con Sonnet 4.6. Cambia a Opus 4.8/4.7 para revisión de contratos, proyectos de varios días, tareas con muchas imágenes o cuando la salida de Sonnet se quede corta.
 
 ---
 
@@ -593,7 +593,7 @@ significativa.
 | **Markdown** (.md) | ✅ Sí | Formato completo |
 | **Word** (.docx) | ✅ Sí | Encabezados, tablas, formato |
 | **Excel** (.xlsx) | ✅ Sí | Fórmulas, varias hojas, formato |
-| **PowerPoint** (.pptx) | ✅ Sí | Diapositivas, formato básico (ver [flujo de plantilla reutilizable →](../workflows/presentation-slides.en.md#reusable-template-from-existing-file)) |
+| **PowerPoint** (.pptx) | ✅ Sí | Diapositivas, formato básico (puedes construir una plantilla reutilizable a partir de un archivo existente) |
 | **PDF** | ✅ Sí | Generado a partir del contenido |
 | **HTML** | ✅ Sí | HTML/CSS completo |
 | **CSV** | ✅ Sí | Exportación de datos |
@@ -667,7 +667,7 @@ SALIDA:   Resumen ejecutivo con decisiones clave y elementos de acción
 - Genera un documento de salida pulido.
 
 **Limitaciones**:
-- Límites del context window (hasta 1M tokens con Opus 4.7 o Sonnet 4.6).
+- Límites del context window (hasta 1M tokens con Opus 4.8/4.7 o Sonnet 4.6).
 - No puede acceder a los sistemas originales de correo/calendario.
 - La calidad de la síntesis depende de la claridad de las fuentes.
 
@@ -764,7 +764,7 @@ Dado que la salida en Excel es una de las grandes fortalezas de Cowork:
 > - **Cowork Excel**: Genera nuevos archivos de Excel a partir de datos no estructurados (recibos, imágenes, texto).
 > - **Claude in Excel**: Ayuda con fórmulas/análisis dentro de archivos de Excel ya existentes.
 >
-> Consulta la [comparación completa](../reference/comparison.md#common-confusion).
+> Cowork Excel y Claude in Excel son productos distintos; no los confundas.
 
 ### Consideraciones regionales
 
@@ -781,22 +781,23 @@ Create an Excel file using European formula syntax (semicolon separators)
 
 ## Uso del context window
 
-Con Opus 4.7, Cowork admite hasta **1M tokens de contexto** (disponibilidad
-general, ya no en beta). En la práctica, la capacidad efectiva depende del modelo
-que selecciones.
+Con Opus 4.8/4.7 (o Sonnet 4.6), Cowork admite hasta **1M tokens de contexto**
+(disponibilidad general, ya no en beta). En la práctica, la capacidad efectiva
+depende del modelo que selecciones.
 
 ### Contexto por modelo
 
 | Modelo | Context Window | Utilizable efectivo |
 |--------|----------------|---------------------|
-| **Haiku 4.5** | Estándar | Estándar menos la sobrecarga |
+| **Haiku 4.5** | 200K tokens | ~170K (sobrecarga del sistema ~30K) |
 | **Sonnet 4.6** | 1M tokens | ~950K (sobrecarga del sistema ~50K) |
 | **Opus 4.7** | 1M tokens | ~950K (sobrecarga del sistema ~50K) |
+| **Opus 4.8** | 1M tokens | ~950K (sobrecarga del sistema ~50K) |
 
 La sobrecarga del sistema (definiciones de herramientas, instrucciones de
-seguridad, registros de ejecución) consume aproximadamente entre 30K y 50K
-tokens, sin importar el modelo. Esto es insignificante a escala de 1M, pero aún
-importa para planear la sesión.
+seguridad, registros de ejecución) consume aproximadamente 50K tokens en la
+ventana de 1M (y unos 30K en la de 200K de Haiku), sin importar el modelo. Esto
+es insignificante a escala de 1M, pero aún importa para planear la sesión.
 
 ### Límites prácticos
 
@@ -846,7 +847,7 @@ formación técnica que necesitan producir trabajo visual.
 
 **Acceso**: `claude.ai/design`, disponible en vista previa de investigación para
 los suscriptores de Claude Pro, Max, Team y Enterprise. Sin costo adicional; usa
-los límites de tu suscripción existente. Funciona con **Claude Opus 4.7**.
+los límites de tu suscripción existente. Funciona con **Claude Opus 4.8/4.7**.
 
 ### Qué hace
 
@@ -1185,7 +1186,7 @@ Más allá de generar archivos `.xlsx` y `.pptx` desde cero, Cowork ahora puede
 editar directamente archivos de Excel y PowerPoint existentes: modificar
 contenido, agregar hojas/diapositivas y actualizar fórmulas en el lugar.
 
-> **Caso de uso práctico**: Construye una plantilla PPTX reutilizable a partir de la presentación existente de tu empresa (colores de marca, estructura propia) y luego genera cada nueva presentación a partir de notas en 3 pasos. Consulta el [flujo de plantilla reutilizable](../workflows/presentation-slides.en.md#reusable-template-from-existing-file).
+> **Caso de uso práctico**: Construye una plantilla PPTX reutilizable a partir de la presentación existente de tu empresa (colores de marca, estructura propia) y luego genera cada nueva presentación a partir de notas en 3 pasos.
 
 ### Complementos de Claude para Microsoft Office (Word, Excel, PowerPoint, Outlook)
 
@@ -1391,7 +1392,7 @@ Con **Desktop Commander** instalado, puedes resolver esto con un archivo
 - Report: [structure preferences]
 ```
 
-> **Requiere**: La extensión Desktop Commander (ver [Primeros pasos, Paso 8](01-getting-started.md#step-8-install-desktop-commander-recommended)).
+> **Requiere**: La extensión Desktop Commander (ver [Paso 8](#paso-8-instala-desktop-commander-recomendado)).
 
 ---
 
@@ -1492,7 +1493,7 @@ acceder directamente a los archivos sin interrupciones.
 3. Haz clic en un conector → configura los permisos de cada herramienta.
 4. Guarda; el conector queda activo de inmediato.
 
-> **Nota**: Desktop Commander (un conector) se aborda por separado en [Primeros pasos, Paso 8](01-getting-started.md#step-8-install-desktop-commander-recommended). Es el primer conector recomendado para la mayoría de las personas.
+> **Nota**: Desktop Commander (un conector) se aborda por separado en el [Paso 8](#paso-8-instala-desktop-commander-recomendado). Es el primer conector recomendado para la mayoría de las personas.
 
 ### El ecosistema de la pestaña Customize
 
@@ -1550,7 +1551,7 @@ Computer Use le permite a Claude controlar tu Mac directamente: abrir
 aplicaciones, navegar por la pantalla, hacer clic, escribir y llenar formularios,
 sin integraciones de API personalizadas ni configuración.
 
-**Cómo activarlo**: Ver [Primeros pasos, Paso 9](01-getting-started.md#step-9-enable-computer-use-macos-optional).
+**Cómo activarlo**: Ver [Paso 9](#paso-9-activa-computer-use-vista-previa-de-investigación-solo-macos).
 
 **Disponible en**: Planes Pro y Max, macOS (23 de marzo de 2026, vista previa de investigación).
 
@@ -1655,7 +1656,7 @@ tarea que involucre una herramienta web sin conector pasará primero por Chrome.
 
 **Problema de VPN**: La VM de Cowork entra en conflicto con el ruteo de red de la
 VPN. Este es el problema reportado con mayor frecuencia (#1). Solución: Desconecta
-la VPN antes de usar Cowork. Consulta [Solución de problemas](04-troubleshooting.md#vm-connection-issues) para más detalles.
+la VPN antes de usar Cowork. Consulta [Problemas de VM y conexión](#problemas-de-vm-y-conexión) para más detalles.
 
 ---
 
@@ -2276,7 +2277,7 @@ flowchart TD
 |------------------|----------------|-----------------|
 | `Failed to start Claude's workspace — VM connection timeout after 60 seconds` | VPN activa | Desconecta la VPN → reintenta |
 | `Chrome native messaging host not found` | Desajuste de la extensión | Instalación manual del host (ver más abajo) |
-| `Context limit reached` (a ~165K, no a 200K) | Sobrecarga del sistema | Divide la tarea en lotes más pequeños |
+| `Context limit reached` (a ~950K utilizables, no al 1M nominal) | Sobrecarga del sistema | Divide la tarea en lotes más pequeños |
 | `Access denied — path outside allowed directories` | Carpeta no autorizada | Vuelve a otorgar acceso a la carpeta |
 | `Session terminated unexpectedly` | Suspensión/segundo plano | Mantén la aplicación en primer plano, desactiva la suspensión |
 | `Cannot connect to Chrome` | Faltan permisos | Otorga el permiso de Accessibility |
@@ -2295,7 +2296,7 @@ flowchart TD
 
 | Paso | Acción |
 |------|--------|
-| 1 | **Revisa la suscripción**: Debe ser de nivel Pro o Max |
+| 1 | **Revisa la suscripción**: Debe ser de nivel Pro, Max, Team o Enterprise |
 | 2 | **Actualiza la aplicación**: Claude Desktop → Check for Updates |
 | 3 | **Reinicia la aplicación**: Ciérrala por completo (Cmd+Q en macOS, Alt+F4 en Windows) y vuelve a abrirla |
 | 4 | **Revisa la región**: Algunas funciones pueden tener un despliegue regional |
@@ -2308,7 +2309,7 @@ flowchart TD
 - La función aparece atenuada (grayed out).
 
 **Soluciones**:
-- Verifica que tu suscripción Pro o Max esté activa (claude.ai → Settings).
+- Verifica que tu suscripción Pro, Max, Team o Enterprise esté activa (claude.ai → Settings).
 - Espera 24 h después de actualizar la suscripción.
 - Contacta a soporte si persiste después de 48 h.
 
@@ -2473,15 +2474,16 @@ comunicación host↔VM. No existe una solución que mantenga la VPN activa.
 ### Se alcanza el límite de contexto demasiado pronto (error conocido)
 
 **Síntomas**:
-- «Context limit reached» aparece a ~165-175K tokens.
-- Debería ser 200K, pero llega al límite antes.
+- «Context limit reached» aparece antes de llegar al 1M nominal (alrededor de ~950K tokens).
+- Debería ser 1M, pero llega al límite antes.
 - Más común con tareas que manejan muchos archivos.
 
 **Por qué ocurre**:
 La sobrecarga del sistema (definiciones de herramientas, instrucciones de
-seguridad, registros de ejecución) consume ~25-35K tokens antes de que tu tarea
-siquiera empiece. El contexto utilizable efectivo está más cerca de 165K que de
-200K.
+seguridad, registros de ejecución) consume ~50K tokens antes de que tu tarea
+siquiera empiece. Sobre la ventana de 1M de Opus 4.8/4.7 o Sonnet 4.6, el
+contexto utilizable efectivo está más cerca de ~950K que del 1M nominal. (Con
+Haiku 4.5, cuya ventana es de 200K, el utilizable ronda los ~170K.)
 
 **Soluciones temporales**:
 
@@ -2818,7 +2820,7 @@ El mismo conflicto de ruteo de VPN aplica en Windows. Si experimentas timeouts d
 
 **Soluciones**:
 - Sé más explícito en tu solicitud.
-- Usa los patrones de prompt de [Primeros pasos](01-getting-started.md).
+- Usa los patrones de prompt del [marco CTOC](#paso-5-el-marco-ctoc).
 - Divide las tareas complejas en pasos.
 - Proporciona ejemplos de la salida esperada.
 
@@ -2919,59 +2921,33 @@ Antes de iniciar cualquier tarea:
 - [ ] La solicitud es específica y delimitada.
 - [ ] La salida esperada es clara.
 
----
-
-*[← Seguridad](03-security.md) | [Documentación de Cowork](../README.md)*
 
 ---
 
-## Notas de revisión
+## Notas
 
-Observaciones sobre contenido que podría estar desactualizado o ser inconsistente
-en el documento original (se señalan, no se corrigieron):
+Estado de los datos volátiles, verificado contra la documentación oficial de
+Anthropic el 9 de junio de 2026 (las inconsistencias internas ya se corrigieron
+en el cuerpo):
 
-- **Inconsistencia en el límite de contexto**: La sección «Capacidades» afirma que
-  el context window es de **1M tokens** (con sobrecarga de ~30-50K, utilizable
-  ~950K). Sin embargo, la guía de «Solución de problemas» describe un error en el
-  que el límite se alcanza «a ~165-175K, no a 200K», con una sobrecarga de
-  ~25-35K. Las dos cifras de ventana (1M frente a 200K) y de sobrecarga (50K
-  frente a 35K) no son congruentes entre sí; la sección de troubleshooting parece
-  reflejar una versión anterior (ventana de 200K) que no se actualizó al pasar a
-  1M tokens.
-- **Tabla de modelos disponibles vs. tabla de contexto por modelo**: La tabla de
-  modelos lista **Opus 4.6** y **Opus 4.7** como disponibles, pero la tabla
-  «Contexto por modelo» solo incluye Haiku 4.5, Sonnet 4.6 y Opus 4.7 (omite Opus
-  4.6). No es un error grave, pero conviene verificar qué modelos siguen
-  ofreciéndose al momento de impartir el taller.
-- **Fechas y modelos muy recientes**: El documento cita lanzamientos de febrero a
-  mayo de 2026 (Sonnet 4.6, Opus 4.7, Claude for Word/Outlook, Claude for Small
-  Business, etc.). Dado el ritmo de cambios en estos productos, todas las fechas,
-  versiones de modelos, precios ($20/$100-200 USD) y disponibilidad de conectores
-  deben verificarse contra la documentación oficial vigente antes de la sesión.
-- **Requisitos previos vs. niveles de suscripción**: La tabla de requisitos previos
-  menciona los planes **Pro, Max, Team o Enterprise**, pero la sección de
-  troubleshooting «La opción de Cowork no aparece» solo dice «Debe ser de nivel Pro
-  o Max». Conviene homologar la lista de planes con acceso a Cowork.
-- **Estado «vista previa de investigación» vs. «GA»**: Varias funciones se
-  describen como «research preview» (Computer Use, Scheduled Tasks, Agent Teams,
-  Dispatch) mientras que Cowork en general ya está en «disponibilidad general
-  (GA)». Es coherente, pero el estado de cada función podría haber cambiado;
-  verificar antes de presentarlo como vigente.
-- **Enlaces relativos heredados del documento original**: Se conservaron enlaces
-  internos como `02-capabilities.md`, `03-security.md`, `04-troubleshooting.md`,
-  `../workflows/`, `../prompts/`, `../reference/cheatsheet.md` y
-  `../reference/comparison.md`. Estos apuntan a la estructura del repositorio
-  original (de Florian Bruniaux) y **probablemente no existan** en el repositorio
-  del taller del IEEC. Hay que decidir si se eliminan, se reemplazan por las guías
-  equivalentes del IEEC o se dejan como referencia al material original.
-- **Anclas de los enlaces internos traducidos**: Algunos enlaces internos del
-  documento original apuntaban a anclas en inglés (por ejemplo,
-  `#step-8-install-desktop-commander-recommended`) que ya no coinciden con los
-  encabezados traducidos al español. Se mantuvieron tal cual los que apuntan a
-  otros archivos `.md` externos, pero las referencias internas dentro de esta misma
-  guía deberían reconstruirse si el documento se publica como una sola página.
-- **Mención a moneda EUR y formato europeo**: El contenido original asume un
-  público europeo (ejemplos en EUR, «vous/tu», fórmulas con punto y coma). Para el
-  público mexicano del IEEC podría convenir adaptar los ejemplos a MXN y a la
-  sintaxis de fórmulas local, aunque eso excede una simple traducción y se deja a
-  criterio del instructor.
+- **Precios y suscripciones — confirmados a junio de 2026**: Precios por MTok
+  vigentes: Opus 4.8 y Opus 4.7 $5/$25, Sonnet 4.6 $3/$15, Haiku 4.5 $1/$5;
+  suscripciones Pro $20/mes y Max en dos niveles ($100/mes = 5× Pro, $200/mes =
+  20× Pro). El **modelo insignia actual es Opus 4.8** (lanzado el 28 de mayo de
+  2026), que sucede a Opus 4.7. Aun así, el ritmo de lanzamientos es alto:
+  verifica el modelo más reciente antes de impartir.
+- **Disponibilidad — verificado a junio de 2026**: **Cowork** está en
+  disponibilidad general (GA) desde el 9 de abril de 2026, en todos los planes de
+  pago, para **macOS y Windows**. **Computer Use** sigue en vista previa de
+  investigación, solo para **Pro y Max** (no Team ni Enterprise), dentro de la app
+  de escritorio en **macOS y Windows** (no solo macOS). Los conectores de Google
+  Workspace (Drive, Calendar, Gmail) y DocuSign se anunciaron el 24 de febrero de
+  2026; el de Zoom llegó con la GA el 9 de abril de 2026. El estado de **Scheduled
+  Tasks**, **Agent Teams** y **Dispatch** no pudo confirmarse contra una fuente
+  pública de Anthropic en esta revisión; confírmalo antes de presentarlo como
+  vigente.
+- **Moneda y formato regional (a criterio del instructor)**: Algunos ejemplos del
+  material original asumen un público europeo (montos en EUR, fórmulas con punto y
+  coma). Para el público mexicano del IEEC podría convenir adaptarlos a MXN y a la
+  sintaxis de fórmulas local; eso excede una traducción y se deja a criterio del
+  instructor.

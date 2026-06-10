@@ -6,15 +6,9 @@ tags: [guia-rapida, referencia]
 
 # Guía rápida de Claude Code
 
-**1 página imprimible** — Lo esencial del día a día para máxima productividad
-
 **Autor**: Florian BRUNIAUX | Founding Engineer [@Méthode Aristote](https://methode-aristote.fr)
 
-**Escrito con**: Claude (Anthropic)
-
 **Adaptación al español para el Taller del IEEC**
-
-**Versión**: 3.41.1 | **Última actualización**: mayo de 2026
 
 ---
 
@@ -197,10 +191,17 @@ Model: Sonnet | Ctx: 89.5k | Cost: $2.11 | Ctx(u): 56.0%
 ```
 **Vigila `Ctx(u):`** → >70% = `/compact`, >85% = `/clear`
 
-**Statusline mejorada ([ccstatusline](https://github.com/sirmalloc/ccstatusline)):** agrega a `~/.claude/settings.json`:
-```json
-{ "statusLine": { "type": "command", "command": "npx -y ccstatusline@latest", "padding": 0 } }
+**Statusline del taller ([templates/statusline.py](../templates/statusline.py)):** usa la que viene en este repo. Cópiala a tu carpeta personal y apúntale desde `~/.claude/settings.json`:
+```bash
+cp templates/statusline.py ~/.claude/statusline.py
+chmod +x ~/.claude/statusline.py
 ```
+```json
+{ "statusLine": { "type": "command", "command": "python3 ~/.claude/statusline.py", "padding": 0 } }
+```
+> Solo usa la librería estándar de Python; no instala nada (no necesitas `uv`). Si prefieres `uv`, puedes poner `"command": "uv run ~/.claude/statusline.py"` en su lugar.
+
+*Alternativa de terceros: existe [ccstatusline](https://github.com/sirmalloc/ccstatusline) (`npx -y ccstatusline@latest`), pero en el taller usamos la nuestra.*
 
 ### Umbrales de context
 
@@ -242,7 +243,6 @@ Model: Sonnet | Ctx: 89.5k | Cost: $2.11 | Ctx(u): 56.0%
 | **Sub-agents** | Context aislado, profundidad máxima = 1 |
 | **Filosofía** | «Menos andamiaje, más modelo» — confía en el razonamiento de Claude |
 
-**A fondo**: [Arquitectura e internos](./core/architecture.md)
 
 ---
 
@@ -254,7 +254,7 @@ Model: Sonnet | Ctx: 89.5k | Cost: $2.11 | Ctx(u): 56.0%
 | **OpusPlan** | `/model opusplan` | Opus para planear, Sonnet para ejecutar |
 | **Ultraplan** | `/ultraplan <prompt>` | Planeación en la nube, revisión en el navegador, la terminal queda libre (v2.1.91+, requiere GitHub) |
 
-> **Opus 4.7** (v2.1.114+): el effort por defecto en Claude Code = **xhigh** (en todos los planes). El nuevo nivel `xhigh` queda entre `high` y `max` — control más fino de razonamiento/latencia. Usa `ultrathink` para forzar el effort máximo en el siguiente turno.
+> **Opus 4.8** (v2.1.114+): el effort por defecto en Claude Code = **xhigh** (en todos los planes). El nuevo nivel `xhigh` queda entre `high` y `max` — control más fino de razonamiento/latencia. Usa `ultrathink` para forzar el effort máximo en el siguiente turno.
 
 | Control | Acción | Persistencia |
 |---------|--------|-------------|
@@ -283,8 +283,6 @@ Model: Sonnet | Ctx: 89.5k | Cost: $2.11 | Ctx(u): 56.0%
 | Desarrollo de funciones, depurar, refactorizar | Sonnet | medium–high |
 | Arquitectura, auditoría de seguridad | Opus | high–max |
 
-> Tabla de decisión completa con estimaciones de costo: [Sección 2.5 Guía de selección de modelo y pensamiento](ultimate-guide.md#25-model-selection--thinking-guide)
-
 ### Cambio dinámico de modelo (a mitad de sesión)
 
 **Patrón**: empieza con Sonnet (velocidad) → cambia a Opus (complejidad) → de vuelta a Sonnet
@@ -312,9 +310,9 @@ claude
 **Impacto en el costo**:
 | Modelo | Entrada | Salida | Caso de uso |
 |-------|--------|--------|----------|
-| Opus 4.7 | $5/MTok | $25/MTok | Razonamiento complejo (10-20% de las tareas) |
-| Sonnet 4.6 | $3/MTok | $15/MTok | La mayoría del desarrollo (70-80% de las tareas) |
-| Haiku 4.5 | $0.80/MTok | $4/MTok | Validaciones simples (5-10% de las tareas) |
+| Opus 4.8 (`claude-opus-4-8`, 1M ctx) | $5.00/MTok | $25.00/MTok | Razonamiento complejo (10-20% de las tareas) |
+| Sonnet 4.6 (`claude-sonnet-4-6`, 1M ctx, 64K out) | $3.00/MTok | $15.00/MTok | La mayoría del desarrollo (70-80% de las tareas) |
+| Haiku 4.5 (`claude-haiku-4-5`, 200K ctx, 64K out) | $1.00/MTok | $5.00/MTok | Validaciones simples (5-10% de las tareas) |
 
 **El cambio dinámico** optimiza el costo manteniendo la calidad en las tareas complejas.
 
@@ -331,21 +329,6 @@ claude
 | **Sequential** | Razonamiento estructurado |
 | **Playwright** | Automatización de navegador |
 | **Postgres** | Consultas a la base de datos |
-| **doobidoo** | Memoria semántica + multi-cliente + Knowledge Graph |
-
-**Memoria de Serena**: `write_memory()` / `read_memory()` / `list_memories()`
-
-**Indexación de Serena**:
-```bash
-# Índice inicial
-uvx --from git+https://github.com/oraios/serena serena project index
-
-# Forzar reconstrucción
-serena project index --force-full
-
-# Actualización incremental (más rápida)
-serena project index --incremental --parallel 4
-```
 
 Revisa el estado: `/mcp`
 
@@ -363,6 +346,7 @@ tools: Read, Write, Edit, Bash
 ---
 # Instructions here
 ```
+> Plantilla completa: [../templates/agent.md](../templates/agent.md)
 
 ### Skill — invocable por el usuario (`.claude/skills/my-command/SKILL.md`)
 ```markdown
@@ -375,6 +359,20 @@ disable-model-invocation: true
 Instructions for what to do...
 $ARGUMENTS[0] $ARGUMENTS[1] (or $0 $1) - user args
 ```
+> Plantilla completa: [../templates/skill.md](../templates/skill.md)
+
+### Command (slash command, `.claude/skills/{categoría}/{nombre}/SKILL.md`)
+```markdown
+---
+description: <qué hace el comando>
+argument-hint: <pista de argumentos>
+---
+## Purpose
+## Process
+## Arguments
+## Examples
+```
+> Plantilla completa: [../templates/command.md](../templates/command.md)
 
 ### Hook (macOS/Linux: `.sh` | Windows: `.ps1`)
 
@@ -392,6 +390,7 @@ $input = [Console]::In.ReadToEnd() | ConvertFrom-Json
 # Process JSON input
 exit 0  # 0=continue, 2=block
 ```
+> Plantilla completa: [../templates/hook.md](../templates/hook.md) · registro en [../templates/settings.example.json](../templates/settings.example.json) · script de ejemplo [../templates/scripts/revisar-perimetro.sh](../templates/scripts/revisar-perimetro.sh)
 
 ---
 
@@ -407,22 +406,32 @@ exit 0  # 0=continue, 2=block
 
 ---
 
-## Fórmula rápida para prompts
+## Fórmula para prompts: CRAFT
 
-```
-QUÉ: [Entregable concreto]
-DÓNDE: [Rutas de archivos]
-CÓMO: [Restricciones, enfoque]
-VERIFICAR: [Criterios de éxito]
-```
+El andamiaje **CRAFT** son las cinco piezas que casi siempre mejoran el resultado. No siempre necesitas las cinco, pero entre más completes, mejor sale. (Plantilla completa: [templates/craft-prompt.md](../templates/craft-prompt.md))
+
+| Letra | Pieza | Pregunta que responde |
+|-------|-------|------------------------|
+| **C** | Contexto | ¿Qué situación, datos o antecedentes necesita conocer la IA? |
+| **R** | Rol | ¿Desde qué perspectiva o expertise debe responder? |
+| **A** | Acción | ¿Qué quiero exactamente que haga? (un verbo claro) |
+| **F** | Formato | ¿Cómo quiero el resultado? (tabla, viñetas, longitud) |
+| **T** | Tono | ¿Con qué registro? (formal, divulgativo, para autoridades) |
 
 **Ejemplo:**
 ```
-Agrega validación de entrada al formulario de inicio de sesión.
-DÓNDE: src/components/LoginForm.tsx
-CÓMO: Usa un esquema de Zod, muestra errores en línea
-VERIFICAR: Email vacío muestra error, formato inválido muestra error
+CONTEXTO: Tengo demo-data/resultados-evaluacion.csv con promedios de matemáticas
+y español por estado, más n_estudiantes. Es un corte estatal de una aplicación.
+ROL: Actúa como analista de evaluación educativa del IEEC, sin sobreinterpretar
+diferencias pequeñas entre estados.
+ACCIÓN: Identifica los 3 estados con el promedio más bajo en matemáticas y los 3
+más altos; reporta también su promedio en español y su n_estudiantes.
+FORMATO: Tabla en Markdown (estado, promedio_matematicas, promedio_espanol,
+n_estudiantes, nota) y debajo dos viñetas con los hallazgos principales.
+TONO: Profesional y basado en evidencia; distingue el dato de la interpretación.
 ```
+
+> **Fórmula rápida (alternativa breve)** — para tareas chicas basta con cuatro líneas: **QUÉ** (entregable concreto) · **DÓNDE** (rutas de archivos) · **CÓMO** (restricciones, enfoque) · **VERIFICAR** (criterios de éxito).
 
 ---
 
@@ -577,7 +586,7 @@ CLAUDE_CODE_ENABLE_TASKS=false claude
 
 1. **Revisa siempre los diffs** antes de aceptar
 2. **Usa `/compact`** antes de que el context llegue a un punto crítico (>70%)
-3. **Sé específico** en tus peticiones (QUÉ, DÓNDE, CÓMO, VERIFICAR)
+3. **Sé específico** en tus peticiones — usa **CRAFT** (Contexto, Rol, Acción, Formato, Tono)
 4. **Plan mode primero** para tareas complejas o riesgosas
 5. **Crea un CLAUDE.md** para cada proyecto
 6. **Haz commits con frecuencia** después de cada tarea completada
@@ -638,17 +647,13 @@ where.exe claude; claude doctor; claude mcp list
 
 - **Documentación oficial**: [docs.anthropic.com/claude-code](https://docs.anthropic.com/en/docs/claude-code)
 - **Guía avanzada**: [Claudelog.com](https://claudelog.com/) — consejos y patrones
-- **Whitepapers (FR + EN)**: [cc.bruniaux.com/whitepapers](https://cc.bruniaux.com/whitepapers/) — 10 PDFs temáticos
-- **Memoria del proyecto**: crea un `CLAUDE.md` en la raíz del proyecto
-- **DeepSeek (económico)**: configúralo vía `ANTHROPIC_BASE_URL`
 
 ---
 
 ## Notas
 
 - **Versiones de Claude Code**: la guía original rastrea versiones recientes (hasta ~v2.1.139 en la columna «Desde»). El número de versión del encabezado (3.41.1, mayo de 2026) proviene del documento fuente y no se modificó; consulta `claude --version` para conocer tu versión instalada y el [CHANGELOG](https://github.com/anthropics/claude-code/blob/main/CHANGELOG.md) para lo más reciente.
-- **Precios de los modelos**: las cifras de costo ($/MTok) y los nombres de versión de los modelos (Opus 4.7, Sonnet 4.6, Haiku 4.5) son los del documento original y pueden quedar desactualizados; verifica los precios vigentes en la documentación de Anthropic antes de usarlos para presupuestar.
-- **Adaptación**: traducción y adaptación al español (es-MX) para el Taller de IA con Claude Code del IEEC. Se conservaron en inglés los nombres de slash commands, atajos de teclado, flags de CLI, rutas, variables de entorno, nombres de modelos y términos técnicos establecidos (context, tokens, hook, skill, agent, MCP, worktree, plan mode).
+- **Precios de los modelos**: las cifras de costo ($/MTok) y los nombres de versión de los modelos (Opus 4.8 `claude-opus-4-8`, Sonnet 4.6 `claude-sonnet-4-6`, Haiku 4.5 `claude-haiku-4-5`) se verificaron vigentes (junio de 2026): Opus 4.8 $5.00/$25.00 (1M ctx), Sonnet 4.6 $3.00/$15.00 (1M ctx, 64K out), Haiku 4.5 $1.00/$5.00 (200K ctx, 64K out). Opus 4.7 sigue existiendo, pero 4.8 es el Opus por defecto. Aun así, confirma los precios vigentes en la documentación de Anthropic antes de presupuestar.
 
 ---
 

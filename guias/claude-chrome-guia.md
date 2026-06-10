@@ -32,6 +32,10 @@ y, a partir de lo que le pides, **propone acciones** —navegar a una página,
 hacer clic en un botón, llenar un formulario, leer el texto de la pantalla,
 tomar una captura (screenshot)— y **tú apruebas** antes de que las ejecute.
 
+![Captura: anuncio oficial «Piloting Claude in Chrome» de Anthropic](imagenes/claude-chrome-anuncio.png)
+
+*Capturas tomadas de la documentación pública de Anthropic.*
+
 El ciclo que debes memorizar es:
 
 > **Claude propone → tú decides.**
@@ -85,14 +89,15 @@ pago. Aun así, sigue siendo una capacidad joven; trátala como tal.
 El modelo de Claude disponible depende de tu plan (al momento de escribir):
 
 - **Pro** — limitado a **Haiku 4.5**.
-- **Max / Team / Enterprise** — puedes elegir entre **Opus 4.7**,
-  **Sonnet 4.6** o **Haiku 4.5**.
+- **Max / Team / Enterprise** — puedes elegir entre **Opus 4.8** (o 4.7),
+  **Sonnet 4.6** o **Haiku 4.5** (al momento de escribir; la disponibilidad
+  evoluciona).
 
 ---
 
 ## 3. ¿Quién puede activarlo en una organización?
 
-Si tu IEEC usa un plan **Team** o **Enterprise**, la extensión la controla un
+Si IEEC usa un plan **Team** o **Enterprise**, la extensión la controla un
 administrador:
 
 - El administrador puede **habilitar o deshabilitar** la extensión para toda
@@ -122,12 +127,18 @@ en qué sitios se permite usar Claude in Chrome y en cuáles no.
    (📌) junto a «Claude».
 6. **Concede los permisos** que la extensión solicite cuando te lo pida.
 
+![Captura: artículo «Get started with Claude in Chrome» del centro de ayuda](imagenes/claude-chrome-primeros-pasos.png)
+
+![Captura: pasos de instalación y el modo «Ask before acting» en la documentación oficial](imagenes/claude-chrome-aprobacion.png)
+
 > **Sobre los permisos del navegador:** al instalarse, la extensión pide una
 > lista amplia de permisos de Chrome (acceso a pestañas, a *scripting*, al
 > *debugger*, a almacenamiento, etc.). Son los permisos técnicos que la
 > extensión necesita para «ver» y «actuar» en la pestaña. Esto **no** es lo
 > mismo que el permiso para actuar en un sitio concreto: ese se otorga sitio
 > por sitio, cada vez (ver sección 5).
+
+![Captura: tabla de permisos que la extensión solicita al instalarse, según la documentación oficial](imagenes/claude-chrome-permisos.png)
 
 Antes de tu primer uso real, Anthropic recomienda leer su artículo **«Using
 Claude in Chrome safely»** (usar Claude in Chrome de forma segura). No te lo
@@ -395,5 +406,3 @@ Anthropic:
 - Centro de ayuda «Getting started with Claude in Chrome» — <https://support.claude.com/en/articles/12012173-getting-started-with-claude-for-chrome>
 - Documentación de Claude Code «Use Claude Code with Chrome (beta)» — <https://code.claude.com/docs/en/chrome>
 - Investigación «Mitigating the risk of prompt injections in browser use» — <https://www.anthropic.com/research/prompt-injection-defenses>
-</content>
-</invoke>
