@@ -1,19 +1,5 @@
 # Guía de referencia — Claude in Chrome
 
-> **Para el Taller de IA con Claude Code del IEEC.**
-> Guía de referencia en español (es-MX) para entender qué es *Claude in
-> Chrome*, cómo se habilita, qué puede y qué no puede hacer, y cómo usarlo
-> sin poner en riesgo los datos del IEEC.
->
-> **Audiencia:** equipos del IEEC que **no** programan. No necesitas saber
-> código para leer esta guía.
->
-> **Verificación:** la información de producto está verificada contra la
-> documentación oficial de Anthropic (ver «Fuentes» al final). Las funciones
-> y la disponibilidad cambian rápido; donde algo puede haber cambiado, lo
-> marcamos con «al momento de escribir, …».
-
----
 
 ## 1. ¿Qué es Claude in Chrome?
 
