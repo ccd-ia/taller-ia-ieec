@@ -219,7 +219,7 @@ CONTEXT → TASK → OUTPUT → CONSTRAINTS
 | **C**ontext (Contexto) | Antecedentes, archivos, situación | «Tengo 50 recibos de un viaje de negocios a París…» |
 | **T**ask (Tarea) | Un único objetivo claro | «Extrae todos los gastos a una hoja de cálculo» |
 | **O**utput (Salida) | Formato y ubicación exactos | «Guarda como ~/Cowork-Workspace/output/paris-expenses.xlsx» |
-| **C**onstraints (Restricciones) | Reglas, límites, preferencias | «Usa moneda EUR, fórmulas con punto y coma, clasifica por tipo» |
+| **C**onstraints (Restricciones) | Reglas, límites, preferencias | «Usa moneda USD, fórmulas con coma, clasifica por tipo» |
 
 ### Ejemplo de CTOC
 
@@ -243,7 +243,7 @@ Highlight any risks mentioned.
 | **Sé explícito** | ✅ «files in ~/Cowork-Workspace/input/» en lugar de ❌ «my files» |
 | **Especifica la salida** | ✅ «save to ~/output/report.docx» en lugar de ❌ «create a report» |
 | **Describe el formato** | ✅ «columns: Date, Amount, Category» en lugar de ❌ «make a spreadsheet» |
-| **Agrega restricciones** | ✅ «use European formula syntax» |
+| **Agrega restricciones** | ✅ «use comma formula separators (US/Mexico)» |
 
 ### Descompón las tareas complejas
 
@@ -769,12 +769,13 @@ Dado que la salida en Excel es una de las grandes fortalezas de Cowork:
 ### Consideraciones regionales
 
 La sintaxis de las fórmulas de Excel varía según la región:
-- **EE. UU./Reino Unido**: `=SUM(A1,A2)` (separador con coma).
+- **EE. UU./México/Reino Unido**: `=SUM(A1,A2)` (separador con coma).
 - **UE**: `=SUM(A1;A2)` (separador con punto y coma).
 
-**Consejo**: Especifica tu configuración regional en los prompts:
+**Consejo**: Especifica tu configuración regional en los prompts. Para México,
+usa separadores con coma:
 ```
-Create an Excel file using European formula syntax (semicolon separators)
+Create an Excel file using comma formula separators (US/Mexico syntax)
 ```
 
 ---
@@ -2614,14 +2615,14 @@ Haiku 4.5, cuya ventana es de 200K, el utilizable ronda los ~170K.)
 
 | Problema | Solución |
 |----------|----------|
-| **Sintaxis regional** | Especifica en el prompt: "Use semicolons for formula separators" (UE) o "Use commas for formula separators" (EE. UU.) |
+| **Sintaxis regional** | Especifica en el prompt: "Use commas for formula separators" (EE. UU./México) o "Use semicolons for formula separators" (UE) |
 | **Fórmula como texto** | La celda puede estar con formato de texto; cámbiala a formato de Número |
 | **Falta la referencia de hoja** | Asegúrate de que las referencias entre hojas incluyan el nombre de la hoja |
 
 **Prompt de ejemplo para corregir**:
 ```
 The Excel formulas aren't working. Please regenerate the file
-using European regional settings (semicolon separators in formulas).
+using comma separators in formulas (US/Mexico regional settings).
 ```
 
 ### Formato de archivo incorrecto
@@ -2946,8 +2947,3 @@ en el cuerpo):
   Tasks**, **Agent Teams** y **Dispatch** no pudo confirmarse contra una fuente
   pública de Anthropic en esta revisión; confírmalo antes de presentarlo como
   vigente.
-- **Moneda y formato regional (a criterio del instructor)**: Algunos ejemplos del
-  material original asumen un público europeo (montos en EUR, fórmulas con punto y
-  coma). Para el público mexicano del IEEC podría convenir adaptarlos a MXN y a la
-  sintaxis de fórmulas local; eso excede una traducción y se deja a criterio del
-  instructor.
