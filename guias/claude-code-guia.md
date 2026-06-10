@@ -1,19 +1,5 @@
 # Guía de referencia de Claude Code — Taller del IEEC
 
-> **Para el Taller de IA con Claude Code del IEEC.**
-> Guía de referencia en español (es-MX) que reúne, en un solo lugar, los
-> conceptos y las técnicas de trabajo con *Claude Code* que vimos en la
-> Sesión 2. Cada sección abre con una frase en lenguaje sencillo —«por qué
-> importa»— y luego entra en el detalle.
->
-> **Audiencia:** equipos del IEEC que **no** programan. No necesitas saber
-> código para leer esta guía. Conservamos en inglés solo lo que se escribe
-> literalmente en la herramienta: nombres de comandos (`/compact`, `/plan`…),
-> rutas de archivo, nombres de eventos, nombres de modelos (Haiku/Sonnet/Opus)
-> y términos técnicos ya establecidos (context, tokens, hook, skill, agent,
-> MCP, prompt, diff, commit, worktree, plan mode). Todo lo demás está en
-> español.
-
 ## Cómo usar esta guía
 
 Léela en el orden que quieras: cada sección es autónoma. Si apenas empiezas,
